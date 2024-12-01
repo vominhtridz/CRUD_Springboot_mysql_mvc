@@ -1,7 +1,8 @@
 package com.example.beststore.beststore.controllers;
 import com.example.beststore.beststore.models.Product;
 import com.example.beststore.beststore.models.ProductDto;
-import com.example.beststore.beststore.services.ProductsRepository;
+import com.example.beststore.beststore.repository.ProductsRepository;
+import com.example.beststore.beststore.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,13 +27,17 @@ import java.util.List;
 public class ProductsController {
     @Autowired
     private ProductsRepository repo;
-
-
     @GetMapping({"", "/products"})
     public String ShowProductList(Model model) {
         List<Product> products = repo.findAll();//Sort.by(Sort.Direction.DESC, "id")
         model.addAttribute("products", products);
         return "products/index";
+    }
+    @GetMapping({"","/home"})
+    public String home(Model model) {
+        List<Product> products = repo.findAll();//Sort.by(Sort.Direction.DESC, "id")
+        model.addAttribute("products", products);
+        return "products/productsell"; // Match template name
     }
 //    Insert Product
     @GetMapping({"","/products/create"})
