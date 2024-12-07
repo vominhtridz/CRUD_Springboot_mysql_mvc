@@ -135,6 +135,7 @@ public class ProductsController {
         repo.save(product);
         return "redirect:/products";
     }
+
     // Delete Product
     @GetMapping({"","/products/delete"})
     public String DeleteProduct(Model model, @RequestParam int id){

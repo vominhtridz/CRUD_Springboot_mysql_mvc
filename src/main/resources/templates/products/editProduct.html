@@ -6,69 +6,68 @@
     <title>Sửa Sản Phẩm</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="h-100vh flex items-center justify-center">
-<div class="h-1/2 w-1/2 ">
-    <form action="#" method="post" th:action="@{/edit(id=${product.id})}" th:object="${productDto}" enctype="multipart/form-data" class="w-full p-2 h-full text-left flex flex-col items-center justify-center shadow">
+<body class="min-h-screen bg-gray-100 flex items-center justify-center">
+<div class="w-full sm:w-2/3 lg:w-1/2 xl:w-1/3 bg-white shadow-lg rounded-lg p-6">
+
+    <form action="#" method="post" th:action="@{/edit(id=${product.id})}" th:object="${productDto}" enctype="multipart/form-data" class="space-y-6">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        <h2 class="text-2xl uppercase">Sửa sản Phẩm</h2>
-        <div class="flex  flex-col w-full">
-            <label >ID </label>
-            <input class=" bg-slate-200 px-4 my-0.5 outline-none" th:value="${product.id}" type="text" readonly/>
-        </div>
-        <div class="flex  flex-col w-full">
-            <label >Tên sản phẩm </label>
-            <input class="border border-black px-4 my-0.5 outline-none" th:field="${productDto.name}" type="text" placeholder="Nhập tên sản phâm"/>
-            <p th:errors="${productDto.name}" class="text-red-500 pt-2 text-sm" th:if="${#fields.hasErrors('name')}" ></p>
-        </div>
-        <div class="flex flex-col  w-full">
-            <label >Nhãn hiệu </label>
-            <input th:field="${productDto.brand}" class="px-4 my-0.5 outline-none border border-black" type="text" placeholder="Nhập tên Nhãn hiệu"/>
-            <p th:errors="${productDto.brand}" class="text-red-500 pt-2 text-sm" th:if="${#fields.hasErrors('brand')}" ></p>
 
-        </div>
-        <div class="flex flex-col  w-full">
-            <label >Loại sản phẩm </label>
-            <input th:field="${productDto.category}" class="px-4 my-0.5 outline-none border border-black"  type="text" placeholder="Nhập loại..."/>
-            <p th:errors="${productDto.category}" class="text-red-500 pt-2 text-sm" th:if="${#fields.hasErrors('category')}" ></p>
+        <h2 class="text-3xl font-semibold text-center text-gray-800 uppercase">Sửa sản phẩm</h2>
 
+        <div class="flex flex-col">
+            <label for="product-id" class="text-gray-700">ID</label>
+            <input id="product-id" class="bg-gray-200 text-gray-600 px-4 py-2 mt-1 rounded-md outline-none" th:value="${product.id}" type="text" readonly />
         </div>
-        <div class="flex flex-col  w-full">
-            <label >Mô tả sản phẩm </label>
-            <textarea th:field="${productDto.description}" class="px-4 py-2 my-0.5 outline-none border border-black"  type="text" placeholder="Nhập loại..."/>
-            <p th:errors="${productDto.description}" class="text-red-500 pt-2 text-sm" th:if="${#fields.hasErrors('description')}" ></p>
 
+        <div class="flex flex-col">
+            <label for="product-name" class="text-gray-700">Tên sản phẩm</label>
+            <input id="product-name" class="border border-gray-300 px-4 py-2 mt-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" th:field="${productDto.name}" type="text" placeholder="Nhập tên sản phẩm" />
+            <p th:errors="${productDto.name}" class="text-red-500 text-sm mt-1" th:if="${#fields.hasErrors('name')}"></p>
         </div>
-        <div class="flex flex-col  w-full">
-            <label >Giá </label>
-            <input th:field="${productDto.price}" class="px-4 my-0.5 outline-none border border-black"  type="number" step="0.01" min="0" placeholder="Nhập giá "/>
-            <p th:errors="${productDto.price}" class=" text-red-500 pt-2 text-sm" th:if="${#fields.hasErrors('price')}" ></p>
 
+        <div class="flex flex-col">
+            <label for="product-brand" class="text-gray-700">Nhãn hiệu</label>
+            <input id="product-brand" class="border border-gray-300 px-4 py-2 mt-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" th:field="${productDto.brand}" type="text" placeholder="Nhập tên Nhãn hiệu" />
+            <p th:errors="${productDto.brand}" class="text-red-500 text-sm mt-1" th:if="${#fields.hasErrors('brand')}"></p>
         </div>
-        <div class="flex flex-col w-full">
-            <div class="my-2">
-                <img th:src="@{'/images/' +${product.imageFilename}}" alt="..." width="150">
+
+        <div class="flex flex-col">
+            <label for="product-category" class="text-gray-700">Loại sản phẩm</label>
+            <input id="product-category" class="border border-gray-300 px-4 py-2 mt-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" th:field="${productDto.category}" type="text" placeholder="Nhập loại sản phẩm" />
+            <p th:errors="${productDto.category}" class="text-red-500 text-sm mt-1" th:if="${#fields.hasErrors('category')}"></p>
+        </div>
+
+        <div class="flex flex-col">
+            <label for="product-description" class="text-gray-700">Mô tả sản phẩm</label>
+            <textarea id="product-description" class="border border-gray-300 px-4 py-2 mt-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" th:field="${productDto.description}" placeholder="Nhập mô tả sản phẩm"></textarea>
+            <p th:errors="${productDto.description}" class="text-red-500 text-sm mt-1" th:if="${#fields.hasErrors('description')}"></p>
+        </div>
+
+        <div class="flex flex-col">
+            <label for="product-price" class="text-gray-700">Giá</label>
+            <input id="product-price" class="border border-gray-300 px-4 py-2 mt-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" th:field="${productDto.price}" type="number" step="0.01" min="0" placeholder="Nhập giá sản phẩm" />
+            <p th:errors="${productDto.price}" class="text-red-500 text-sm mt-1" th:if="${#fields.hasErrors('price')}"></p>
+        </div>
+
+        <div class="flex flex-col">
+            <label class="text-gray-700">Ảnh</label>
+            <div class="my-2 flex justify-center">
+                <img th:src="@{'/images/' +${product.imageFilename}}" alt="Product Image" width="150" class="rounded-md">
             </div>
-       <div class="flex items-center">
-           <label >Ảnh </label>
-           <input th:field="${productDto.imageFilename}" class="px-4 my-0.5 outline-none border border-black"  type="file" placeholder="Nhập "/>
-           <p th:errors="${productDto.imageFilename}" class="text-red-500 pt-2 text-sm" th:if="${#fields.hasErrors('imageFilename')}" ></p></div>
-
-    </div>
-        <div class="flex flex-col  w-full">
-            <label >Tạo tại lúc </label>
-            <input th:value="${product.createdAt}" readonly class="px-4 my-0.5 outline-none bg-slate-200 outline-none"  type="text"  />
-
-
+            <input class="border border-gray-300 px-4 py-2 mt-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" th:field="${productDto.imageFilename}" type="file" />
+            <p th:errors="${productDto.imageFilename}" class="text-red-500 text-sm mt-1" th:if="${#fields.hasErrors('imageFilename')}"></p>
         </div>
-        <div class="flex my-2">
-            <button type="submit" class="bg-red-600 mx-2 px-6 text-white py-2 rounded-sm">Sửa sản phẩm</button>
-            <a href="/products"  class="bg-slate-600 px-6 text-white py-2 rounded-sm">Thoát</a>
 
+        <div class="flex flex-col">
+            <label for="created-at" class="text-gray-700">Tạo tại lúc</label>
+            <input id="created-at" class="bg-gray-200 text-gray-600 px-4 py-2 mt-1 rounded-md outline-none" th:value="${product.createdAt}" readonly type="text" />
+        </div>
+
+        <div class="flex justify-between space-x-4 mt-6">
+            <button type="submit" class="w-full sm:w-auto bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition duration-200">Sửa sản phẩm</button>
+            <a href="/products" class="w-full sm:w-auto bg-gray-600 text-white py-2 rounded-md text-center hover:bg-gray-700 transition duration-200">Thoát</a>
         </div>
     </form>
-
-
 </div>
-
 </body>
 </html>
